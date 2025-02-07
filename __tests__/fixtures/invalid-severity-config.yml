@@ -1,0 +1,3 @@
+fail_on_severity: 'so many zombies'
+deny_licenses:
+  - MIT

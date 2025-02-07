@@ -1,0 +1,31 @@
+name: Close stale PRs and Issues
+
+permissions:
+  issues: write
+  pull-requests: write
+
+on:
+  schedule:
+  - cron: "00 0 * * *" # runs at 00:00 daily
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/stale@v9.1.0
+      name: Clean up stale PRs and Issues
+      with:
+        stale-pr-message: "👋 This pull request has been marked as stale because it has been open with no activity for 180 days. You can: comment on the PR or remove the stale label to hold stalebot off for a while, add the `Keep` label to hold stale off permanently, or do nothing. If you do nothing, this pull request will be closed eventually by the stalebot. Please see CONTRIBUTING.md for more policy details."
+        stale-pr-label: "Stale"
+        close-pr-message: "👋 This pull request has been closed by stalebot because it has been open with no activity for over 180 days. Please see CONTRIBUTING.md for more policy details."
+        stale-issue-label: "Stale"
+        stale-issue-message: "👋 This issue has been marked as stale because it has been open with no activity for 180 days. You can: comment on the issue or remove the stale label to hold stalebot off for a while, add the `Keep` label to hold stale off permanently, or do nothing. If you do nothing, this issue will be closed eventually by the stalebot. Please see CONTRIBUTING.md for more policy details."
+        close-issue-message: "👋 This issue has been closed by stalebot because it has been open with no activity for over 180 days. Please see CONTRIBUTING.md for more policy details."
+        exempt-pr-labels: "Keep" # a "Keep" label will keep the PR from being closed as stale
+        exempt-issue-labels: "Keep" # a "Keep" label will keep the issue from being closed as stale
+        days-before-pr-stale: 180 # when the PR is considered stale
+        days-before-pr-close: 15 # when the PR is closed by the bot
+        days-before-issue-stale: 180 # when the issue is considered stale
+        days-before-issue-close: 15 # when the issue is closed by the bot
+        exempt-assignees: 'advanced-security-dependency-graph'
+        ascending: true
